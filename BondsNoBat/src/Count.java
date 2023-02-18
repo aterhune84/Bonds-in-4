@@ -4,10 +4,12 @@ public class Count {
     private int balls;
     private int strikes;
     private AtBatResult result;
-    public Count(){
+    private int swingRand;
+    public Count(int sr){
         balls = 0;
         strikes = 0;
         result = AtBatResult.Unknown;
+        swingRand = sr;
     }
 
     public void nextPitch(char c){
@@ -22,7 +24,7 @@ public class Count {
             strikes++;
         }
         else if (c == 'F' || c == 'L' || c == 'S' || c == 'T' || c == 'X'){
-            if (rand.nextInt(999) < 191){
+            if (rand.nextInt(999) < swingRand){
                 balls++;
             }
             else{
@@ -51,10 +53,6 @@ public class Count {
         if (balls == 4){
             result = AtBatResult.Walk;
         }
-    }
-
-    public AtBatResult getResult() {
-        return result;
     }
 
     public void resetCount(){
